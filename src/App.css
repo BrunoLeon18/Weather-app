@@ -313,6 +313,7 @@ button{
 @media(min-width:789px){
   #root{
     justify-content: space-evenly;
+    max-width: 800px;
   }
 
   .weather-card{
@@ -368,6 +369,11 @@ button{
 
   .weather-input{
     width: 100%;
+  }
+
+  .toggle-weather{
+    position: absolute;
+    right: 40px
   }
 
 }
