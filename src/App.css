@@ -8,8 +8,8 @@
 {
   --body-color: #d5f3ff;
   --body-background:#51b4e8;
-  --card-color:#e5f2ff;
-  --card-background:#d5f3ff;
+  --card-color:#9de3ff;
+  --card-background:#9dccfc;
   --botton-color: #38a0d8;
   --hard-color:#026eed;
   --ligth-color:#56a5f1;
@@ -28,6 +28,10 @@
   transition: 0.5s;
 }
 
+html{
+  background: radial-gradient(var(--body-color) 0%, var(--body-background) 100%);
+}
+
 body{
   font-family: lato, helvetica, sans-serif;
   background: radial-gradient(var(--body-color) 0%, var(--body-background) 100%);
@@ -43,7 +47,7 @@ ul{
 }
 
 h1{
-  font-size:65px;
+  font-size:55px;
   font-weight: 300;
 }
 
@@ -59,11 +63,12 @@ button{
 #root{
   display: flex;
   width: 100vw;
-  justify-content: center;
+  justify-content:center;
   align-items: center;
   gap: 2rem;
   flex-direction: column;
   height: 100vh;
+  padding: 1em;
 }
 
 
@@ -71,17 +76,17 @@ button{
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  width:300px;
+  max-width:300px;
+  width: 100%;
   padding: 2rem 1rem 1rem; 
   height: 250px;
   border-radius:20px;
   background: linear-gradient(var(--card-color) 0%, var(--card-background) 100%);
-  box-shadow: 12px 15px 15px rgba(0, 0, 0, 0.25),
-            -12px -15px 15px rgba(255,255,255,0.1);
+  box-shadow: 12px 8px 12px rgba(0, 0, 0, 0.25)
 }
 
 .weather-image img{
-  width:90%;
+  width:100%;
   height: 100%;
   object-fit: cover;
 }
@@ -139,8 +144,7 @@ button{
   color: #fff;
   border: none;
   border-radius: 8px;
-  box-shadow: 12px 15px 15px rgba(0, 0, 0, 0.25),
-            -12px -15px 15px rgba(255,255,255,0.1);
+  box-shadow: 12px 8px 12px rgba(0, 0, 0, 0.25)
 }
 
 .btn-primary:hover{
@@ -154,25 +158,27 @@ button{
   align-items: center;
   gap:2rem;
   position: relative;
+  width: 100%;
 }
 
 /* SEARCH */
 
 .weather-search{
   display: flex;
-  width: 300px;
+  max-width: 480px;
+  width: 100%;
   gap: 5px;
   background-color: var(--body-background);
   padding: 0.5rem;
   border-radius:8px;
-  box-shadow:12px 15px 15px rgba(0, 0, 0, 0.25),
-            -12px -15px 15px rgba(255,255,255,0.1); ;
+  box-shadow: 12px 8px 12px rgba(0, 0, 0, 0.25)
 }
 
 .weather-input{
   background-color:var(--body-background);
   border: none;
   color: #fff;
+  width: 100%;
 }
 
 .weather-input::placeholder{
@@ -301,9 +307,35 @@ button{
   align-items:center;
   background: radial-gradient(var(--body-color) 0%, var(--body-background) 100%);
   width: 100%;
-  height: 100%;
   position: fixed;
   z-index: 100;
+  height: 100%;
+}
+
+/* SHOW ERROR */
+
+.error{
+  display:flex;
+  justify-content:center;
+  align-items: center;
+  color: #fff;
+  border: 1px solid red;
+  background-color:rgba(255, 0, 0, 0.4);
+  font-size: 12px;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 480px;
+  padding: 2em 1em;
+  border-radius:0.8em;
+  text-align: center;
+}
+
+.error_title{
+  margin-left: 0.2em;
+}
+
+.bx{
+  font-size: 30px;
 }
 
 

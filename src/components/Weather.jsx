@@ -4,6 +4,8 @@ import Search from "./Search";
 import DarkMode from "./DarkMode";
 import CardWeather from "./CardWeather";
 import Loader from "./Loader";
+import ShowError from "./ShowError";
+
 
 
 const Weather = () => {
@@ -12,6 +14,7 @@ const Weather = () => {
   const [search, setSearch] = useState("");
   const [toggle, setToggle] = useState(true);
   const [loading, setLoading] = useState(true);
+  const [hasError, setHasError] = useState(false);
   
   
         
@@ -28,22 +31,29 @@ const Weather = () => {
   };
 
   const handleSearch = (e) => {
-    setSearch(e.target.value);
+    setSearch(e.target.value.trim());
   };
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
 
     const apiKey = "5bef01db05dd6b71694f09c366cb33a0";
-  
+    setLoading(true)
     axios
       .get(
         `https://api.openweathermap.org/data/2.5/weather?q=${search}&appid=${apiKey}&units=metric&lang=es`
       )
       .then((response) => {
           setWeather(response.data)
+          setHasError(false)
       })
-      .catch((error) => error);
+      .catch((error) => {
+        console.log(error)
+        setHasError(true)
+      })
+      .finally(() => {
+        setLoading(false)
+      })
   };
 
   useEffect(() => {
@@ -54,22 +64,28 @@ const Weather = () => {
       const lon = coords.longitude;
       const apiKey = "5bef01db05dd6b71694f09c366cb33a0";
 
+      setLoading(true)
       axios
         .get(
           `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric&lang=es`
         )
         .then((resp) => {
             setWeather(resp.data)
-            setLoading(false);
+            setHasError(false)
         })
-        .catch((error) => error );
+        .catch((error) => {
+          console.log(error)
+          setHasError(true)
+        })
+        .finally(() => {
+          setLoading(false)
+        })
     });
 
   }, []);
 
   return (
     <>
-    {loading && <Loader/>}
       <div className="weather-header">
             <h2 className="weather-title">Weather App</h2>
             <Search 
@@ -79,16 +95,26 @@ const Weather = () => {
             getToggle={getToggle} 
             toggle={toggle} />
       </div>
-        <CardWeather 
-        weather={weather} 
-        change={change} />
-      <div className="btn-weather">
-        <button 
-        className="btn-primary" 
-        onClick={getChange}>
-        {change ? "Cambiar a °C" : "Cambiar a °F"}
-        </button>
-      </div>
+        {loading
+        ? 
+        (<Loader />)
+        :
+        ( hasError 
+          ?
+          (<ShowError/>)
+          :
+        (<>
+        <CardWeather
+          weather={weather}
+          change={change} /><div className="btn-weather">
+            <button
+              className="btn-primary"
+              onClick={getChange}>
+              {change ? "Cambiar a °C" : "Cambiar a °F"}
+            </button>
+          </div>
+          </>))
+          }
 
     </>
   );
