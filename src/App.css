@@ -76,7 +76,7 @@ button{
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  max-width:300px;
+  max-width:480px;
   width: 100%;
   padding: 2rem 1rem 1rem; 
   height: 250px;
@@ -92,7 +92,8 @@ button{
 }
 
 .weather-image{
-  width:120px
+  max-width:180px;
+  width: 100%;
 }
 
 .weather-aside h1{
@@ -102,7 +103,10 @@ button{
 }
 
 .weather-aside{
-  width: 140px;
+  max-width: 240px;
+  width: 100%;
+  height: 100%;
+  padding-left: 10px;
 }
 
 .weather-aside ul li{
@@ -123,7 +127,8 @@ button{
 .weather-footer{
   display: flex;
   justify-content: space-between;
- 
+ align-items: center;
+ min-height: 40px;
 }
 
 .weather-footer h2{
@@ -408,4 +413,10 @@ button{
     right: 40px
   }
 
+}
+
+@media(min-width:340px){
+  h1{
+    font-size:80px
+  }
 }
